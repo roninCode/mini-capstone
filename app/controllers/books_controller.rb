@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   def hello
-    p "Hello!!!"
+    @books = Book.all
     render 'books.html.erb'
   end
 end
