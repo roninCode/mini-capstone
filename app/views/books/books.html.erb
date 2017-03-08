@@ -1,3 +1,6 @@
 <% @books.each do |book| %>
-  <p> <%= book.title %><p>
+  <p> <%= book.title %> by <%= book.author %> is about <%= book.description %>.<p>
+  <p> <%= book.title %> is available for $<%= book.price %>.
+  <p> <%= book.title %> has the copyright date of: <%= book.copyright_year %></p>
+  <p>--------------------------------------------------------------------------</p>
 <% end %>
