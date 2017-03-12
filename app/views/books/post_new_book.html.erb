@@ -1,0 +1,8 @@
+<h2>You're in the post section</h2>
+
+<p> <%= @book.title %> by <%= @book.author %> is about <%= @book.description %>.<p>
+<p> <%= @book.title %> is available for $<%= @book.price %>.
+<p>Image here:</p> <img src=<%= @book.image %>> 
+<p><%= @book.image %></p>
+<p> <%= @book.title %> has the copyright date of: <%= @book.copyright_year %></p>
+<p> See only this @book by clicking <a href="/@book/<%= @book.id %>" >HERE!!!!!!</a></p>
