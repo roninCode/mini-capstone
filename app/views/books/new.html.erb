@@ -1,0 +1,35 @@
+<%= form_tag("/books", method: "post") do %>
+  <label for="author"> Author </label>
+  <div>
+      <input type="text" name="author">    
+    </div>
+  
+  <label for="title"> Title </label>
+    <div>
+      <input type="text" name="title">    
+    </div>
+
+  <label for="price"> Price </label>
+    <div>
+      <input type="text" name="price">    
+    </div>
+
+  <label for="description"> Description </label>
+    <div>
+      <input type="text" name="description">    
+    </div>
+
+  <label for="copyright_year"> Copyright Year </label>
+    <div>
+      <input type="text" name="copyright_year">    
+    </div>
+
+  <label for="image"> Image </label>
+    <div>
+      <input type="text" name="image"> 
+    </div>
+
+    <div>
+      <input type="submit">
+    </div>
+<% end %>

@@ -1,0 +1,41 @@
+<h1> You're in the edit (where you see the form and the make changes)</h1>
+
+<%= form_tag("/books/#{@book.id}", method: "patch") do %>
+  <label for="author"> Edit Author </label>
+    <div>
+      <input type="text" name="author" value="<%= @book.author %>">    
+    </div>
+  
+  <label for="title"> Edit Title </label>
+    <div>
+      <input type="text" name="title" value="<%= @book.title %>">    
+    </div>
+
+  <label for="price"> Edit Price </label>
+    <div>
+      <input type="text" name="price" value="<%= @book.price %>">    
+    </div>
+
+  <label for="description"> Edit Description </label>
+    <div>
+      <input type="text" name="description" value="<%= @book.description %>">
+    </div>
+
+  <label for="copyright_year"> Edit Copyright Year </label>
+    <div>
+      <input type="text" name="copyright_year" value="<%= @book.copyright_year %>">    
+    </div>
+
+  <label for="image"> Edit the Image Url </label>
+    <div>
+      <input type="text" name="image" value="<%= @book.image %>">    
+    </div>
+
+    <div>
+      <input type="submit" value="Edit this Book">
+    </div>
+<% end %>
+
+<%= form_tag "/books/#{@book.id}", method: :delete do %>
+  <input type="submit" value="This will destoy the crap out of this">
+<% end %>
