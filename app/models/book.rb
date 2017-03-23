@@ -1,4 +1,7 @@
 class Book < ApplicationRecord
+belongs_to :supplier
+has_many :images
+has_many :orders
   def sale_message
     if price.nil? || price < 2
       "Discount Item!"
@@ -6,7 +9,6 @@ class Book < ApplicationRecord
       "Everyday Value"
     end
   end
-
 
   def tax
     price.to_f * 0.09

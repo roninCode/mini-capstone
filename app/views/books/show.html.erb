@@ -2,21 +2,26 @@
  
 <%= @book.sale_message %>
  
+<p>You can get <%= @book.title %> from <%= @book.supplier.name %>.</p> 
+
+<p> <img class="index_image" src="<%= @book.images[0].url %>"> </p>
+
 <p> <%= @book.title %> by <%= @book.author %> is about <%= @book.description %>.<p>
 <p> <%= @book.title %> is available for $<%= @book.price %>.
 <p>Your estimated taxes on this book will be: $<%= @book.tax %></p>
 <p>Which means your total cost will be: $<%= @book.total %></p>
-
-<%= image_tag "#{@book.image}" %>
-
-<%= image_tag 'http://power.itp.ac.cn/~jmyang/funny/fun4.jpg' %>
-<p>*******************************************************</p>
-<%= image_tag "#{@book.image}" %>
-<%= image_tag "#{@book.image}" %>
-<p><%= @book.image %></p>
 <p> <%= @book.title %> has the copyright date of: <%= @book.copyright_year %></p>
 <p><a href="/books/<%= @book.id %>/edit">Edit/Destroy this Book!</a></p>
 
-
+<%= form_tag '/orders', method: :post do %>
+  <div>
+    <p>How Many? <input type="text" name="quantity"></p>
+    <input type="hidden" name="book_id" value="<%= @book.id %>">
+  </div>
+  <div>
+    <p>Book Id: <input type="integer" name="book_id" value="<%= @book.id %>"></p>
+  </div>
+  <input type="submit" value="Buy Now!!">
+<% end %>
  
 

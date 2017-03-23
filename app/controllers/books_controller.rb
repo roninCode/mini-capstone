@@ -14,11 +14,13 @@ class BooksController < ApplicationController
 
   def show
     book_id = params[:id]
-    if params[:random_item] = "random_item"
+    if params[:random_item] == "random_item"
       @book = Book.all.shuffle[0]
     else
       @book = Book.find_by(id: book_id)
     end
+    p @book.images
+    p "*" * 50
     render 'show.html.erb'
   end
 
@@ -51,7 +53,6 @@ class BooksController < ApplicationController
       title: params["title"],
       author: params["author"],
       description: params["description"],
-      image: params["image"],
       copyright_year: params["copyright_year"],
       price: params["price"]
     )
