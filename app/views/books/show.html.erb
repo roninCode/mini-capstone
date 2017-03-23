@@ -13,15 +13,32 @@
 <p> <%= @book.title %> has the copyright date of: <%= @book.copyright_year %></p>
 <p><a href="/books/<%= @book.id %>/edit">Edit/Destroy this Book!</a></p>
 
+<hr>
+
 <%= form_tag '/orders', method: :post do %>
   <div>
     <p>How Many? <input type="text" name="quantity"></p>
     <input type="hidden" name="book_id" value="<%= @book.id %>">
   </div>
+
   <div>
     <p>Book Id: <input type="integer" name="book_id" value="<%= @book.id %>"></p>
   </div>
+  
+  <div>
+    <p>Your book costs: $<%= @book.price %></p>
+    <p>Taxes these days are: 0.07%</p>
+    <p>That means that your total cost will be: $<%= @book.price * 0.07 + @book.price %> per book.</p>
+  </div>
+
+
   <input type="submit" value="Buy Now!!">
 <% end %>
  
+
+
+
+
+
+
 

@@ -24,13 +24,10 @@
 #   book.save
 # end
 
-Book.all.each do |book|
-  image1 = Image.new(
-    url: "http://www.cies2017.org/wp-content/uploads/book_launch_graphic2.png",
-    book_id: book.id
-    )
-  image1.save  
-end
-
-
-
+# Book.all.each do |book|
+#   image1 = Image.new(
+#     url: "http://www.cies2017.org/wp-content/uploads/book_launch_graphic2.png",
+#     book_id: book.id
+#     )
+#   image1.save  
+# end

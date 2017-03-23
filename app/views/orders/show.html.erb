@@ -1,5 +1,14 @@
 <h2>Hey <%= current_user.username %>!!</h2>
 <h4>You just bought <%= @order.quantity %> copies of <%= @order.book.title %>!</h4>
+<h4><%= @order.book.title %> costs <%= @order.book.price %>.</h4> 
+
+<h4> You ordered <%= @order.quantity %> at $<%= @order.book.price %> making your subtotal: $<%= @order.subtotal %></h4>
+<h4>Taxes: 0.07%</h4>
+<h4>Total: $<%= @order.total %></h4>
+
+
+
+
 <p>Book id: <%= @order.book_id %></p>
 
 <a href="/books/<%= @order.book_id %>">Back to this Book</a>
