@@ -1,13 +1,19 @@
 
 <body>
-  <% @books.each do |book| %>
-    <div>
-      <p> <%= book.title %> by <%= book.author %> is about <%= book.description %>.<p>
-      <p> <%= book.title %> is available for $<%= book.price %>.
-      <p> <img class="index_image" src="<%= book.images[0].url %>"> </p>
-      <p> <%= book.title %> has the copyright date of: <%= book.copyright_year %></p>
-      <p> See only this book by clicking <a href="/books/<%= book.id %>" >HERE!!!!!!</a></p>
-      <hr>
-    </div>
-  <% end %>
+<div class="container-fluid">
+    <% @books.each_slice(3) do |book3| %>
+      <div class="row">
+        <% book3.each do |book| %>
+          <div class="col-md-4 well">
+            <p> <%= book.title %> by <%= book.author %> is about <%= book.description %>.<p>
+            <p> <%= book.title %> is available for $<%= book.price %>.
+            <p> <img class="index_image" src="<%= book.images[0].url %>"> </p>
+            <p> <%= book.title %> has the copyright date of: <%= book.copyright_year %></p>
+            <p> See only this book by clicking <a href="/books/<%= book.id %>" >HERE!!!!!!</a></p>
+            <hr>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+</div>    
 </body>
