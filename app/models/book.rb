@@ -2,6 +2,9 @@ class Book < ApplicationRecord
 belongs_to :supplier
 has_many :images
 has_many :orders
+has_many :categorized_books
+has_many :categories, through: :categorized_books
+has_many :carted_books
   def sale_message
     if price.nil? || price < 2
       "Discount Item!"

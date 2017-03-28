@@ -1,0 +1,12 @@
+<% current_user.carted_books.all.each do |book| %>
+  <p>Quantity: 
+  <%= Order.find_by(id: book.order_id).quantity %>
+  </p>
+  <p>Title:
+  <%= @books.find_by(id: book.book_id).title %></p>
+  <p>Status:
+
+    
+  </p>
+  <hr>
+<% end %>

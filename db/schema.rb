@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323213939) do
+ActiveRecord::Schema.define(version: 20170328011037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,31 @@ ActiveRecord::Schema.define(version: 20170323213939) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.integer  "supplier_id"
+    t.integer  "category_id"
+  end
+
+  create_table "carted_books", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "quantity"
+    t.integer  "order_id"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "book_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.integer  "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+  end
+
+  create_table "categorized_books", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "book_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "images", force: :cascade do |t|
@@ -36,9 +61,9 @@ ActiveRecord::Schema.define(version: 20170323213939) do
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "quantity"
-    t.decimal  "subtotal",   precision: 5, scale: 2
+    t.decimal  "subtotal",   precision: 9, scale: 2
     t.decimal  "tax",        precision: 5, scale: 2
-    t.decimal  "total",      precision: 5, scale: 2
+    t.decimal  "total",      precision: 9, scale: 2
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.integer  "book_id"

@@ -1,11 +1,17 @@
 class BooksController < ApplicationController
   def index
-    if params[:sort_price] == "low_to_high"
-      @books = Book.order(:price)
-    elsif params[:sort_price] == "high_to_low"
-      @books = Book.order(price: :desc)
-    elsif params[:sale_item] == "ten_or_less"
-      @books = Book.where("price <= ?", 10)
+    # if params[:sort_price] == "low_to_high"
+    #   @books = Book.order(:price)
+    # elsif params[:sort_price] == "high_to_low"
+    #   @books = Book.order(price: :desc)
+    # elsif params[:sale_item] == "ten_or_less"
+    #   @books = Book.where("price <= ?", 10)
+    # else
+    #   @books = Book.all
+    # end
+    @books = Book.all
+    if params[:category] == "adventure"
+      @books = Category.find_by(name: params[:category].capitalize) ###instance or array....each way breaks something
     else
       @books = Book.all
     end
@@ -19,8 +25,6 @@ class BooksController < ApplicationController
     else
       @book = Book.find_by(id: book_id)
     end
-    p @book.images
-    p "*" * 50
     render 'show.html.erb'
   end
 

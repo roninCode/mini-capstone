@@ -17,7 +17,13 @@ Rails.application.routes.draw do
   post "/login" => "sessions#create"
   get "/logout" => "sessions#destroy"
 
-  #checkout stuff
+  #order stuff
   post '/orders' => 'orders#create'
   get '/orders/:id/show' => 'orders#show'
+
+  #cart   -----  show all carted books...submitted via book/show
+  get '/carts' => 'carts#index'
+  post '/carts' => 'carts#create'
+  # post books "add to cart" to '/cart'
+
 end

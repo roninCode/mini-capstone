@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
     @order.save
 
     render 'show.html.erb'
+    # Eventually redirect_to '/orders/#{@order.id}'
   end
 
 end

@@ -1,5 +1,8 @@
-<h2>Hey <%= current_user.username %>!!</h2>
+<h2>Hey <%= current_user.email %>!!</h2>
 <h4>You just bought <%= @order.quantity %> copies of <%= @order.book.title %>!</h4>
+
+<img class="index_image" src="<%= @book.images[0].url %>">
+
 <h4><%= @order.book.title %> costs <%= @order.book.price %>.</h4> 
 
 <h4> You ordered <%= @order.quantity %> at $<%= @order.book.price %> making your subtotal: $<%= @order.subtotal %></h4>
