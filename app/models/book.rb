@@ -4,6 +4,12 @@ has_many :images
 has_many :categorized_books
 has_many :categories, through: :categorized_books
 has_many :carted_books
+
+validates :title, presence: true
+validates :author, presence: true
+validates :price, numericality: true
+validates :description, presence: true
+
   def sale_message
     if price.nil? || price < 2
       "Discount Item!"

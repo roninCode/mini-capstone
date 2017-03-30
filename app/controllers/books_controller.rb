@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+before_action :authenticate_admin!, :except => [:index, :show] 
   def index
     # if params[:sort_price] == "low_to_high"
     #   @books = Book.order(:price)
@@ -29,65 +30,45 @@ class BooksController < ApplicationController
   end
 
   def new
-    if current_user && current_user.admin
-      render 'new.html.erb'
-    else
-      redirect_to "/books"
-    end
+    render 'new.html.erb'
   end
  
   def create
-    if current_user && current_user.admin
-      @book = Book.new(
-        title:  params['title'],
-        author: params['author'],
-        price: params['price'],
-        image: params['image'],
-        description: params['description'],
-        copyright_year:  params['copyright_year']
-      )
-      @book.save
-      flash[:success] = "Yeah you just added a book....damn you must feel super bueno"
-      redirect_to "/books/#{@book.id}"
-    else
-      redirect_to "/books"
-    end
+    @book = Book.new(
+      title:  params['title'],
+      author: params['author'],
+      price: params['price'],
+      image: params['image'],
+      description: params['description'],
+      copyright_year:  params['copyright_year']
+    )
+    @book.save
+    flash[:success] = "Yeah you just added a book....damn you must feel super bueno"
+    redirect_to "/books/#{@book.id}"
   end
 
   def edit
-    if current_user && current_user.admin
-      @book = Book.find_by(id: params[:id])
-      render 'edit.html.erb'
-    else
-      redirect_to "/books"
-    end
+    @book = Book.find_by(id: params[:id])
+    render 'edit.html.erb'
   end
 
   def update
-    if current_user && current_user.admin
-      @book = Book.find_by(id: params[:id])
-      @book.update(
-        title: params["title"],
-        author: params["author"],
-        description: params["description"],
-        copyright_year: params["copyright_year"],
-        price: params["price"]
-      )
-      flash[:info] = "You just updated this book...interesting...books' info doesn't change that often.... maybe you f*#*ed the F up"
-      redirect_to "/books/#{@book.id}"
-    else
-      redirect_to "/books"
-    end
+    @book = Book.find_by(id: params[:id])
+    @book.update(
+      title: params["title"],
+      author: params["author"],
+      description: params["description"],
+      copyright_year: params["copyright_year"],
+      price: params["price"]
+    )
+    flash[:info] = "You just updated this book...interesting...books' info doesn't change that often.... maybe you f*#*ed the F up"
+    redirect_to "/books/#{@book.id}"
   end
 
   def destroy
-    if current_user && current_user.admin
-      @book = Book.find(params[:id])
-      @book.destroy
-      flash[:danger] = "You just destroyed the crap out of this book!!! Oh yeah, burn it down!"
-      redirect_to "/"
-    else
-      redirect_to "/books"
-    end
+    @book = Book.find(params[:id])
+    @book.destroy
+    flash[:danger] = "You just destroyed the crap out of this book!!! Oh yeah, burn it down!"
+    redirect_to "/"
   end
 end
