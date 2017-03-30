@@ -11,11 +11,13 @@
 <p>Your estimated taxes on this book will be: $<%= @book.tax %></p>
 <p>Which means your total cost will be: $<%= @book.total %></p>
 <p> <%= @book.title %> has the copyright date of: <%= @book.copyright_year %></p>
-<p><a href="/books/<%= @book.id %>/edit">Edit/Destroy this Book!</a></p>
 
+<% if current_user && current_user.admin %>
+  <p><a href="/books/<%= @book.id %>/edit">Edit/Destroy this Book!</a></p>
+<% end %>
 <hr>
 
-<%= form_tag '/orders', method: :post do %>
+<%= form_tag '/carts', method: :post do %>
   <div>
     <p>How Many? <input type="text" name="quantity"></p>
     <input type="hidden" name="book_id" value="<%= @book.id %>">
@@ -34,7 +36,7 @@
 
   <input type="submit" value="Add to Cart">
 <% end %>
- 
+
 
 
 

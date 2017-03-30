@@ -1,17 +1,11 @@
 <h2>Hey <%= current_user.email %>!!</h2>
-<h4>You just bought <%= @order.quantity %> copies of <%= @order.book.title %>!</h4>
 
-<img class="index_image" src="<%= @book.images[0].url %>">
+<p> <% current_user.carted_books.all.each do |carted_book| %>
+    <p><%= carted_book.book.title %></p>
+    <p><% @order.subtotal += carted_book.book.price * carted_book.quantity.to_f %></p>
+  <% end %>
+</p>
 
-<h4><%= @order.book.title %> costs <%= @order.book.price %>.</h4> 
-
-<h4> You ordered <%= @order.quantity %> at $<%= @order.book.price %> making your subtotal: $<%= @order.subtotal %></h4>
-<h4>Taxes: 0.07%</h4>
-<h4>Total: $<%= @order.total %></h4>
-
-
-
-
-<p>Book id: <%= @order.book_id %></p>
-
-<a href="/books/<%= @order.book_id %>">Back to this Book</a>
+<p><% @order.tax %></p>
+<p>Your subtotal is: $<%= @order.subtotal %></p>
+<p><%= (@order.subtotal * 0.07).round(2) %></p>

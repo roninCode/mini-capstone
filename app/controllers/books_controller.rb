@@ -29,45 +29,65 @@ class BooksController < ApplicationController
   end
 
   def new
-    render 'new.html.erb'
+    if current_user && current_user.admin
+      render 'new.html.erb'
+    else
+      redirect_to "/books"
+    end
   end
  
   def create
-    @book = Book.new(
-      title:  params['title'],
-      author: params['author'],
-      price: params['price'],
-      image: params['image'],
-      description: params['description'],
-      copyright_year:  params['copyright_year']
-    )
-    @book.save
-    flash[:success] = "Yeah you just added a book....damn you must feel super bueno"
-    redirect_to "/books/#{@book.id}"
+    if current_user && current_user.admin
+      @book = Book.new(
+        title:  params['title'],
+        author: params['author'],
+        price: params['price'],
+        image: params['image'],
+        description: params['description'],
+        copyright_year:  params['copyright_year']
+      )
+      @book.save
+      flash[:success] = "Yeah you just added a book....damn you must feel super bueno"
+      redirect_to "/books/#{@book.id}"
+    else
+      redirect_to "/books"
+    end
   end
 
   def edit
-    @book = Book.find_by(id: params[:id])
-    render 'edit.html.erb'
+    if current_user && current_user.admin
+      @book = Book.find_by(id: params[:id])
+      render 'edit.html.erb'
+    else
+      redirect_to "/books"
+    end
   end
 
   def update
-    @book = Book.find_by(id: params[:id])
-    @book.update(
-      title: params["title"],
-      author: params["author"],
-      description: params["description"],
-      copyright_year: params["copyright_year"],
-      price: params["price"]
-    )
-    flash[:info] = "You just updated this book...interesting...books' info doesn't change that often.... maybe you f*#*ed the F up"
-    redirect_to "/books/#{@book.id}"
+    if current_user && current_user.admin
+      @book = Book.find_by(id: params[:id])
+      @book.update(
+        title: params["title"],
+        author: params["author"],
+        description: params["description"],
+        copyright_year: params["copyright_year"],
+        price: params["price"]
+      )
+      flash[:info] = "You just updated this book...interesting...books' info doesn't change that often.... maybe you f*#*ed the F up"
+      redirect_to "/books/#{@book.id}"
+    else
+      redirect_to "/books"
+    end
   end
 
   def destroy
-    @book = Book.find(params[:id])
-    @book.destroy
-    flash[:danger] = "You just destroyed the crap out of this book!!! Oh yeah, burn it down!"
-    redirect_to "/"
+    if current_user && current_user.admin
+      @book = Book.find(params[:id])
+      @book.destroy
+      flash[:danger] = "You just destroyed the crap out of this book!!! Oh yeah, burn it down!"
+      redirect_to "/"
+    else
+      redirect_to "/books"
+    end
   end
 end

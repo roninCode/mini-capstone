@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328011037) do
+ActiveRecord::Schema.define(version: 20170330001627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,13 +60,11 @@ ActiveRecord::Schema.define(version: 20170328011037) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "quantity"
     t.decimal  "subtotal",   precision: 9, scale: 2
     t.decimal  "tax",        precision: 5, scale: 2
     t.decimal  "total",      precision: 9, scale: 2
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.integer  "book_id"
   end
 
   create_table "suppliers", force: :cascade do |t|
@@ -81,8 +79,9 @@ ActiveRecord::Schema.define(version: 20170328011037) do
     t.string   "username"
     t.string   "password_digest"
     t.string   "email"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "admin",           default: false
   end
 
 end

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   #order stuff
   post '/orders' => 'orders#create'
-  get '/orders/:id/show' => 'orders#show'
+  get '/orders/:id' => 'orders#show'
 
   #cart   -----  show all carted books...submitted via book/show
   get '/carts' => 'carts#index'

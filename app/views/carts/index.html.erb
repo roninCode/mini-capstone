@@ -1,12 +1,33 @@
-<% current_user.carted_books.all.each do |book| %>
-  <p>Quantity: 
-  <%= Order.find_by(id: book.order_id).quantity %>
+
+
+<% current_user.carted_books.all.each do |carted_book| %>
   </p>
   <p>Title:
-  <%= @books.find_by(id: book.book_id).title %></p>
-  <p>Status:
+  <%= carted_book.book.title %></p>
 
-    
+  <p>Quantity: 
+    <%= carted_book.quantity %>
   </p>
+
+  <p>Price: $<%= carted_book.book.price %></p>
+  
+
+  <p>Subtotal: %<%= carted_book.book.price * carted_book.quantity.to_f %>
+  </p>
+
+  <%= form_tag '/carts/destroy', method: :destroy do %>
+    <div>
+      <input type="destroy" name="destroy" value="Remove From Cart">
+      <input type="submit" name="destroy" value="Remove From Cart">
+    </div>
+  <% end %>
   <hr>
+<% end %>
+
+
+<h1>Your total is: $Money</h1>
+
+<%= form_tag '/orders', method: :post do %>
+  
+  <input type="submit" value="Click to Place your Order">
 <% end %>
